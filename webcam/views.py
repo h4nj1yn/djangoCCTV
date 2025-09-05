@@ -60,7 +60,8 @@ def liveStream(camId):
 		else:
 	        print("Video frame is empty or video processing has been successfully completed.")
 			break
-		    results = securityalarm(im0)
+		    
+		results = securityalarm(im0)
 
 	    # print(results)  # access the output
 	
@@ -79,4 +80,5 @@ def stream_1(request):
 def stream_2(request):
 	return StreamingHttpResponse(liveStream(2), content_type='multipart/x-mixed-replace; boundary=frame')
 # ――――――――――――――――――――――――――――――――――――――――――――――――――――――――
+
 
