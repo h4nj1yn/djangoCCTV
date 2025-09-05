@@ -58,7 +58,6 @@ def liveStream(camId):
 			yield (b'--frame\r\n'  # Yield the JPEG frame as a byte stream
 				   b'Content-Type: image/jpeg\r\n\r\n' + buffer.tobytes() + b'\r\n')
 		else:
-	        print("Video frame is empty or video processing has been successfully completed.")
 			break
 		    
 		results = securityalarm(im0)
@@ -80,5 +79,6 @@ def stream_1(request):
 def stream_2(request):
 	return StreamingHttpResponse(liveStream(2), content_type='multipart/x-mixed-replace; boundary=frame')
 # ――――――――――――――――――――――――――――――――――――――――――――――――――――――――
+
 
 
