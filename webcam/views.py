@@ -34,11 +34,11 @@ def liveStream(camId):
 	# Video writer
 	w, h, fps = (int(cap.get(x)) for x in (cv2.CAP_PROP_FRAME_WIDTH, cv2.CAP_PROP_FRAME_HEIGHT, cv2.CAP_PROP_FPS))
 	video_writer = cv2.VideoWriter("security_output.avi", cv2.VideoWriter_fourcc(*"mp4v"), fps, (w, h))
-	
+
 	from_email = "abc@gmail.com"  # the sender email address
 	password = "---- ---- ---- ----"  # 16-digits password generated via: https://myaccount.google.com/apppasswords
 	to_email = "xyz@gmail.com"  # the receiver email address
-	
+
 	# Initialize security alarm object
 	securityalarm = solutions.SecurityAlarm(
 	    show=True,  # display the output
@@ -51,20 +51,20 @@ def liveStream(camId):
 	# Process video
 	while cap.isOpened():# Loop through the video frames
 		success, im0 = cap.read()  # Read a frame from the video
-		if success:
-			results = model(im0)  # Run YOLO inference on the frame
-			annotated_frame = results[0].plot()  # Visualize the results on the frame
-			success, buffer = cv2.imencode('.jpg', annotated_frame)  # Convert the frame to JPEG format
-			yield (b'--frame\r\n'  # Yield the JPEG frame as a byte stream
-				   b'Content-Type: image/jpeg\r\n\r\n' + buffer.tobytes() + b'\r\n')
-		else:
+		# if success:
+		# 	results = model(im0)  # Run YOLO inference on the frame
+		# 	annotated_frame = results[0].plot()  # Visualize the results on the frame
+		# 	success, buffer = cv2.imencode('.jpg', annotated_frame)  # Convert the frame to JPEG format
+		# 	yield (b'--frame\r\n'  # Yield the JPEG frame as a byte stream
+		# 		   b'Content-Type: image/jpeg\r\n\r\n' + buffer.tobytes() + b'\r\n')
+		if not success:
 			break
 		    
 		results = securityalarm(im0)
 
 	    # print(results)  # access the output
 	
-	    video_writer.write(results.plot_im)  # write the processed frame.
+		video_writer.write(results.plot_im)  # write the processed frame.
 
 	# Release the video capture object and close the display window
 	cap.release()
@@ -79,6 +79,7 @@ def stream_1(request):
 def stream_2(request):
 	return StreamingHttpResponse(liveStream(2), content_type='multipart/x-mixed-replace; boundary=frame')
 # ――――――――――――――――――――――――――――――――――――――――――――――――――――――――
+
 
 
 
