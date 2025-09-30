@@ -36,7 +36,7 @@ def liveStream(camId):
 	video_writer = cv2.VideoWriter("security_output.avi", cv2.VideoWriter_fourcc(*"mp4v"), fps, (w, h))
 
 	from_email = "abc@gmail.com"  # the sender email address
-	password = "zfnw tgnq ubmn vfyk"  # 16-digits password generated via: https://myaccount.google.com/apppasswords
+	password = "---- ---- ---- ----"  # 16-digits password generated via: https://myaccount.google.com/apppasswords
 	to_email = "xyz@gmail.com"  # the receiver email address
 
 	# Initialize security alarm object
