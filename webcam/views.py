@@ -55,7 +55,7 @@ def liveStream(camId):
 			results = securityalarm(im0)  # Run YOLO inference on the frame
 			annotated_frame = results[0].plot()  # Visualize the results on the frame
 			success, buffer = cv2.imencode('.jpg', annotated_frame)  # Convert the frame to JPEG format
-			yield (b'--frame\r\n'  # Yield the JPEG frame as a byte stream
+			yield (b'--frame\r\n'  # Produce the JPEG frame as a byte stream
 				   b'Content-Type: image/jpeg\r\n\r\n' + buffer.tobytes() + b'\r\n')
 		else:
 			break
