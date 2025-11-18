@@ -26,6 +26,8 @@ tensorflow
 tensorflow-estimator
 termcolor
 typing-extensions
+ultralytics
 Werkzeug
 wrapt
 zipp
+
